@@ -70,8 +70,8 @@ $url = $url[0];
                     <div class="item">Цирковые площадки</div>
                 </a>
                 <?if($_SESSION['user']):?>
-                    <a href="/">
-                        <div class="item">Кнопка для авторизованных</div>
+                    <a href="/user.php">
+                        <div class="item">Личный кабинет</div>
                     </a>
                 <?endif;?>
             </div>
