@@ -94,4 +94,30 @@ function outGym(int $sum, int $inPage, string $url)
     $ret.= '</div>';
      return $ret;
 }
+
+function getTickets($id)
+{
+    $tickets = array();
+    $mysql = new mysqli('127.0.0.1','mysql','mysql','users');
+    $res = $mysql->query("SELECT * FROM `tickets` WHERE `user_id` = '$id'");
+    while($ticket = $res->fetch_assoc())
+    {
+        $tickets[] = $ticket;
+    }
+    $result='';
+    foreach($tickets as $tick)
+    {
+        $result.='<tr>';
+        foreach($tick as $key => $t)
+        {
+            if($key == "age")
+            {
+                $t=($t==1)?'Взрослые':'Дети';
+            }
+            $result .= '<td>'.$t.'</td>';
+        }
+        $result.='</tr>';
+    }
+    echo $result;
+}
 ?>
