@@ -77,7 +77,7 @@ header {
     padding: 40px;
     float: left;
     border-right: 2px solid #dddddd;
-    min-height: 600px;
+    min-height: 800px;
     background: #eeeeee;
     margin-right: 40px;
 }
@@ -134,6 +134,31 @@ header {
     object-fit: contain;
     vertical-align: middle;
     float: left;
+}
+.content .nav {
+    text-align: center;
+    display: inline-block;
+}
+.nav a {
+    text-decoration: none;
+    height: 40px;
+    font-size: 1.2em;
+    line-height: 40px;
+    color: #000000;
+    padding: 5px;
+    text-align: center;
+}
+.nav a:last-child::after {
+    content: none;
+}
+.nav a::after {
+    content: ' | ';
+}
+.nav a:hover {
+    background: linear-gradient(to bottom, #eeeeee, #cccccc);
+}
+.nav a .active {
+    border: 1px solid #0077ff;
 }
 
 

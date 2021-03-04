@@ -15,6 +15,9 @@ $url = $url[0];
         alert("Неверный пароль!");
     </script>
 <?endif;?>
+
+<?include($_SERVER['DOCUMENT_ROOT'].'/functions.php');?>
+
 <!doctype html>
 <html lang="ru">
 
