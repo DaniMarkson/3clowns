@@ -49,8 +49,8 @@ $url = $url[0];
                 <?if(empty($_SESSION['user'])):?>
                     <form method="post" action="/auth/users.php">
                         <input type="hidden" name="url" value="<?=$url?>">
-                        <input type="text" name="login" size="15">
-                        <input type="password" name="password" size="15">
+                        <input type="text" name="login" size="15" placeholder="Логин">
+                        <input type="password" name="password" size="15" placeholder="Пароль">
                         <button type="submit">Авторизоваться</button>
                     </form>
                 <?else:?>
