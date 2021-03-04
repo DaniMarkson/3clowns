@@ -22,6 +22,11 @@ header {
 .main-description {
     font-size: 1.2em;
 }
+.auth {
+    display: inline-block;
+    width: 200px;
+    text-align: center;
+}
 .main-logo {
     width: 13%;
     display: inline-block;
