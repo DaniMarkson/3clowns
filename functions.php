@@ -97,9 +97,17 @@ function outGym(int $sum, int $inPage, string $url)
 
 function getTickets($id)
 {
+    $url = $_SERVER['REQUEST_URI'];
     $tickets = array();
     $mysql = new mysqli('127.0.0.1','mysql','mysql','users');
-    $res = $mysql->query("SELECT * FROM `tickets` WHERE `user_id` = '$id'");
+    if ($id == "admin")
+    {
+        $res = $mysql->query("SELECT * FROM `tickets`");
+    }
+    else
+    {
+        $res = $mysql->query("SELECT * FROM `tickets` WHERE `user_id` = '$id'");
+    }
     while($ticket = $res->fetch_assoc())
     {
         $tickets[] = $ticket;
@@ -107,16 +115,41 @@ function getTickets($id)
     $result='';
     foreach($tickets as $tick)
     {
+        $tick["age"] = $tick["age"]==1?'Взрослые':'Дети';
         $result.='<tr>';
         foreach($tick as $key => $t)
         {
-            if($key == "age")
+            if($id != "admin" || $key != "name")
             {
-                $t=($t==1)?'Взрослые':'Дети';
+                $result .= '<td>'.$t.'</td>';
             }
-            $result .= '<td>'.$t.'</td>';
+            else
+            {
+                $result .= '<td><a href="/user.php?profile='.$tick["user_id"].'">'.$t.'</a></td>';
+            }
         }
-        $result.='</tr>';
+        if ($id != "admin")
+        {
+            $result .= '<td><form action="/edit-tickets.php" method="post">
+            <input type="hidden" name="url" value="'.$url.'">
+            <input type="hidden" name="id" value="'.$tick["id"].'">
+            <button type="submit">Редактировать</button>
+            </form></td>';
+            $result .= '<td><form action="/edit-delete-tickets.php" method="post">
+            <input type="hidden" name="url" value="'.$url.'">
+            <input type="hidden" name="id" value="'.$tick["id"].'">
+            <input type="hidden" name="user_id" value="'.$tick["user_id"].'">
+            <input type="hidden" name="act" value="delete">
+            <button type="submit">Удалить</button>
+            </form></td>';
+            $result .= '<td><form action="/sertificate.php" method="post">
+            <input type="hidden" name="url" value="'.$url.'">
+            <input type="hidden" name="id" value="'.$tick["id"].'">
+            <input type="hidden" name="user_id" value="'.$tick["user_id"].'">
+            <button type="submit">Сертификат</button>
+            </form></td>';
+        }
+        $result .='</tr>';
     }
     echo $result;
 }

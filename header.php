@@ -57,7 +57,7 @@ $url = $url[0];
                         <button type="submit">Авторизоваться</button>
                     </form>
                 <?else:?>
-                    Здравствуйте, <?=$_SESSION['user']['name']?>
+                    Здравствуйте, <a href="/user.php"><?=$_SESSION['user']['name']?></a>
                     <br>
                     <form method="post" action="<?=$url?>">
                         <input type="hidden" name="logout" value="yes">
@@ -72,9 +72,9 @@ $url = $url[0];
                 <a href="/place/">
                     <div class="item">Цирковые площадки</div>
                 </a>
-                <?if($_SESSION['user']):?>
-                    <a href="/user.php">
-                        <div class="item">Личный кабинет</div>
+                <?if($_SESSION['user'] && $_SESSION['user']['login'] == "admin"):?>
+                    <a href="/tickets.php">
+                        <div class="item">Забронированные места</div>
                     </a>
                 <?endif;?>
             </div>
