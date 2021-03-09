@@ -9,12 +9,17 @@ if($_SESSION['user']['login']=="admin" && $_GET['profile'])
 }
 ?>
 <?if(!empty($_SESSION['user'])):?>
+
     <h1>Личный кабинет<?=$user?" пользователя ".$user['login']:""?></h1>
+    
     <div class="item">
         <img src="/user.png">
         <div class="description">
             <div class="title">Пользователь: <?=$user?$user['login']:$_SESSION['user']['login']?></div>
-            <div class="text">Имя: <?=$user?$user['name']:$_SESSION['user']['name']?></div>
+            <div class="text">
+                Имя: <?=$user?$user['name']:$_SESSION['user']['name']?><br>
+                Адрес: 
+            </div>
         </div> 
     </div>
     <hr>

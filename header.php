@@ -15,7 +15,6 @@ $url = $url[0];
         alert("Неверный пароль!");
     </script>
 <?endif;?>
-
 <?include($_SERVER['DOCUMENT_ROOT'].'/functions.php');?>
 
 <!doctype html>
@@ -56,6 +55,10 @@ $url = $url[0];
                         <input type="password" name="password" size="15" placeholder="Пароль">
                         <button type="submit">Авторизоваться</button>
                     </form>
+                    <form method="post" action="/auth/registration.php">
+                        <input type="hidden" name="url" value="<?=$url?>">
+                        <button type="submit">Регистрация</button>
+                    </form>
                 <?else:?>
                     Здравствуйте, <a href="/user.php"><?=$_SESSION['user']['name']?></a>
                     <br>
@@ -65,6 +68,7 @@ $url = $url[0];
                     </form>
                 <?endif;?>
             </div>
+            
             <div class="menu">
                 <a href="/category/clowns/">
                     <div class="item">Категории артистов</div>
@@ -72,9 +76,17 @@ $url = $url[0];
                 <a href="/place/">
                     <div class="item">Цирковые площадки</div>
                 </a>
+                <a href="/search/">
+                    <div class="item">Поиск</div>
+                </a>
+                <?if(!empty($_SESSION['user'])):?>
+                    <a href="/auth/weather.php">
+                        <div class="item">Сегодняшняя погода</div>
+                    </a>
+                <?endif;?>
                 <?if($_SESSION['user'] && $_SESSION['user']['login'] == "admin"):?>
                     <a href="/tickets.php">
-                        <div class="item">Забронированные места</div>
+                        <div class="item">Брони</div>
                     </a>
                 <?endif;?>
             </div>

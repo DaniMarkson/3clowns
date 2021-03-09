@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Мар 07 2021 г., 19:32
+-- Время создания: Мар 09 2021 г., 14:57
 -- Версия сервера: 8.0.19
 -- Версия PHP: 7.2.34
 
@@ -39,7 +39,13 @@ CREATE TABLE `gymnasts` (
 
 INSERT INTO `gymnasts` (`id`, `name`, `description`) VALUES
 (1, 'Вероника Лавийская', 'Первая гимнастка нашего цирка. Является чемпионом мира по прыжкам с изюмом'),
-(2, 'Сильвана Ветрокрылая', 'Старая гимнастка. Немного мёртвая. Любит также гипнотизировать зрителей.');
+(2, 'Сильвана Ветрокрылая', 'Старая гимнастка. Немного мёртвая. Любит также гипнотизировать зрителей.'),
+(3, 'Лизавета Степановна', 'Акробатка и молодец'),
+(4, 'Верка Сердючка', 'Выступает в юбке, во время прыжков дополнительно показывает фокусы'),
+(5, 'Гадя Петрович', 'Фокусы всё суровей'),
+(6, 'Александра Александровна', 'Разбавляет всю эту бешеную программу стандартными номерами'),
+(7, 'Mrs Smith', 'Приходит на концерты с мужем'),
+(8, 'No name', 'Настолько таинственная, что забыла собственное имя');
 
 -- --------------------------------------------------------
 
@@ -79,7 +85,7 @@ INSERT INTO `tickets` (`id`, `user_id`, `name`, `age`, `quests`) VALUES
 (3, 1, 'Администратор', 1, 2),
 (4, 1, 'Администратор', 1, 4),
 (5, 1, 'Администратор', 0, 12),
-(10, 3, 'Кристина', 0, 2);
+(18, 3, 'Кристина', 1, 4);
 
 -- --------------------------------------------------------
 
@@ -142,19 +148,19 @@ ALTER TABLE `username`
 -- AUTO_INCREMENT для таблицы `gymnasts`
 --
 ALTER TABLE `gymnasts`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT для таблицы `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT для таблицы `username`
 --
 ALTER TABLE `username`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

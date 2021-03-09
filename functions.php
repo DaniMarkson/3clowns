@@ -1,5 +1,5 @@
 <?
-function getGymnasts(int $sum)
+function getGymnasts()
 {
     $gumnasts = array();
     $mysql = new mysqli('127.0.0.1','mysql','mysql','users');
@@ -12,25 +12,18 @@ function getGymnasts(int $sum)
     {
         $gymnasts[$index]['img'] = '/gym'.$index.'.jpg';
     }
-    $index=0;
-    while(count($gymnasts)<$sum)
-    {
-        $gymnasts[]=$gymnasts[$index];
-        $index++;
-    }
-    if(count($gymnasts)>$sum)
-    {
-        $temp = array();
-        for($i=0; $i<$sum; $i++)
-        {
-            $temp[] = $gymnasts[$i];
-        }
-        $gymnasts=$temp;
-    }
 return $gymnasts;
 }
+function getGymnast($id)
+{
+    $mysql = new mysqli('127.0.0.1','mysql','mysql','users');
+    $result = $mysql->query("SELECT * FROM `gymnasts` WHERE `id` = '$id'");
+    $gym = $result->fetch_assoc();
+        $gym['img'] = '/gym'.($id-1).'.jpg';
+return $gym;
+}
 
-function outGym(int $sum, int $inPage, string $url)
+function outGym(int $inPage, string $url)
 {
     $arrayGym = getGymnasts($sum);
     $result = array();
@@ -44,7 +37,7 @@ function outGym(int $sum, int $inPage, string $url)
         $page = $_GET['page'];
     }
     $index = $inPage * ($page-1);
-    for($i=$index; ($i<$index+$inPage)&&($i<$sum); $i++)
+    for($i=$index; ($i<$index+$inPage)&&($i<count($arrayGym)); $i++)
     {
         $result[] = $arrayGym[$i];
     }
@@ -52,7 +45,7 @@ function outGym(int $sum, int $inPage, string $url)
     {
         $ret .= '<div class="item"><img src="'.$item['img'].'">
         <div class="description">
-            <div class="title">'.$item['name'].'</div>
+            <div class="title"><a href ="'.$url.'?id='.$item["id"].'">'.$item['name'].'</a></div>
             <div class="text">'.$item['description'].'</div>
         </div> 
     </div>';
@@ -63,7 +56,7 @@ function outGym(int $sum, int $inPage, string $url)
         $ret.= '<a href="'.$url.'">Начало</a>';
         $ret.= '<a href="'.$url.'?page='.($page-1).'">Предыдущая</a>';
     }
-    $value = $sum;
+    $value = count($arrayGym);
     $pages = 0;
     $active='';
     if($value%$inPage>0)
