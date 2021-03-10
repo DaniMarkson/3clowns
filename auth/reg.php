@@ -20,9 +20,12 @@
         }
         else
         {
-            $mysql->query("INSERT INTO username (id, login, password, name) VALUES (NULL, '$login', '$password', '$name')");
+            $mysql->query("INSERT INTO username (id, login, password, name, city) VALUES (NULL, '$login', '$password', '$name', 'default')");
+            $text = 'Новая регистрация: пользователь '.$login;
+            $mysql->query("INSERT INTO log ( `text` ) VALUES ( '$text' )");
             $result = $mysql->query("SELECT * FROM `username` WHERE `login` = '$login'");
             $user = $result->fetch_assoc();
+            
             if (!empty($user)) {
                 session_start();
                 $_SESSION['user'] = [
@@ -32,7 +35,7 @@
                 ];
                 header('Location: '.$_POST["url"]);
             }
-            header('Location: '.$_POST["url"]);
+            
         }
     }
 }

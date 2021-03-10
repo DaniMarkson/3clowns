@@ -146,4 +146,12 @@ function getTickets($id)
     }
     echo $result;
 }
+function newPage($url, $login)
+{
+    $text = 'Пользователь '.$login.' посетил страницу '.$url;
+    $mysql = new mysqli('127.0.0.1','mysql','mysql','users');
+    $mysql->query("INSERT INTO log ( `text` ) VALUES ( '$text' )");
+}
+
+
 ?>

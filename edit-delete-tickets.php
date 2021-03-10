@@ -2,6 +2,8 @@
     $id = $_POST["id"];
     $mysql = new mysqli('127.0.0.1','mysql','mysql','users');
     $res = $mysql->query("DELETE FROM `tickets` WHERE `id` = '$id'");
+    $text = 'Удален билет №'.$id;
+    $mysql->query("INSERT INTO log ( `text` ) VALUES ( '$text' )");
     $url = $_POST["url"];
     $filename='upload/'.$_POST["user_id"].'/'.$_POST["id"].'.txt';
     if(file_exists($filename))
@@ -22,6 +24,9 @@ else:
         $sql = "UPDATE tickets SET age='$age', quests='$quests' WHERE id='$id'";
         if (mysqli_query($conn, $sql)) {
             $success = true;
+            $text = 'Изменен билет №'.$id;
+            $sql = "INSERT INTO log ( `text` ) VALUES ( '$text' )";
+            mysqli_query($conn, $sql);
         }
         mysqli_close($conn);
         if ($success) {

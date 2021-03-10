@@ -16,6 +16,7 @@ if(!empty($_POST))
                 "id" => $user['id'],
                 "login" => $user['login'],
                 "name" => $user['name'],
+                "city" => $user['city'],
             ];
             header('Location: '.$_POST["url"]);
         }

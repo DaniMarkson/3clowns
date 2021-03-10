@@ -1,8 +1,14 @@
 <?session_start();?>
+<?include($_SERVER['DOCUMENT_ROOT'].'/functions.php');?>
+
 <?if($_POST["logout"] == "yes"):
     unset($_SESSION['user']);
 endif;?>
 <?$url = $_SERVER['REQUEST_URI'];
+if($_SESSION['user'])
+{
+    newPage($url, $_SESSION['user']["login"]);
+}
 $url = explode('?', $url);
 $url = $url[0];
 ?>
@@ -15,7 +21,6 @@ $url = $url[0];
         alert("Неверный пароль!");
     </script>
 <?endif;?>
-<?include($_SERVER['DOCUMENT_ROOT'].'/functions.php');?>
 
 <!doctype html>
 <html lang="ru">
@@ -62,6 +67,19 @@ $url = $url[0];
                 <?else:?>
                     Здравствуйте, <a href="/user.php"><?=$_SESSION['user']['name']?></a>
                     <br>
+                    <?if($_SESSION['user']['city']):?>
+                        Ваш город: <?=$_SESSION['user']['city']==1?"Волгоград":"Москва"?>
+                    <?else:?>
+                        <form method="post" action="/auth/city.php">
+                        <input type="hidden" name="id" value="<?=$_SESSION['user']['id']?>">
+                        <input type="hidden" name="url" value="<?=$url?>">
+                        <select name="city" size="2" multiple>
+                            <option selected value="1">Волгоград</option>
+                            <option value="2">Москва</option>
+                        </select>
+                        <button type="submit">Выбрать</button>
+                    </form>
+                    <?endif;?>
                     <form method="post" action="<?=$url?>">
                         <input type="hidden" name="logout" value="yes">
                         <button type="submit">Выйти</button>
@@ -70,15 +88,15 @@ $url = $url[0];
             </div>
             
             <div class="menu">
-                <a href="/category/clowns/">
+                <a href="/category/">
                     <div class="item">Категории артистов</div>
                 </a>
                 <a href="/place/">
                     <div class="item">Цирковые площадки</div>
                 </a>
-                <a href="/search/">
+                <!-- <a href="/search/">
                     <div class="item">Поиск</div>
-                </a>
+                </a> -->
                 <?if(!empty($_SESSION['user'])):?>
                     <a href="/auth/weather.php">
                         <div class="item">Сегодняшняя погода</div>

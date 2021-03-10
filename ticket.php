@@ -11,6 +11,9 @@ if(!empty($_POST["quests"]))
     $sql = "INSERT INTO tickets (id, user_id, name, age, quests) VALUES (NULL, '$user_id', '$name', '$age', '$quests')";
 
     if (mysqli_query($conn, $sql)) {
+        $text = 'Пользователь '.$name.' оформил новый билет на '.$quests. ' человек';
+        $sql = "INSERT INTO log ( `text` ) VALUES ( '$text' )";
+        mysqli_query($conn, $sql);
         setcookie("handler", 'Билет оформлен!', time()+60);
         $res = 'Билет оформлен!';
     } else {
