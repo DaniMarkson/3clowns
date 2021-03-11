@@ -65,7 +65,7 @@ $url = $url[0];
                         <button type="submit">Регистрация</button>
                     </form>
                 <?else:?>
-                    Здравствуйте, <a href="/user.php"><?=$_SESSION['user']['name']?></a>
+                    Здравствуйте, <a href="/auth/profile.php"><?=$_SESSION['user']['name']?></a>
                     <br>
                     <?if($_SESSION['user']['city']):?>
                         Ваш город: <?=$_SESSION['user']['city']==1?"Волгоград":"Москва"?>

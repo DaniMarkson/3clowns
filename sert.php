@@ -1,5 +1,5 @@
 <?
-if($_POST["act"]=="delete")
+if($_POST["action"]=="sert_delete")
 {
     $url = $_POST["url"];
     $err_url = $_POST["err_url"];

@@ -123,20 +123,22 @@ function getTickets($id)
         }
         if ($id != "admin")
         {
-            $result .= '<td><form action="/edit-tickets.php" method="post">
+            $result .= '<td><form method="post">
+            <input type="hidden" name="action" value="edit">
             <input type="hidden" name="url" value="'.$url.'">
             <input type="hidden" name="id" value="'.$tick["id"].'">
             <button type="submit">Редактировать</button>
             </form></td>';
-            $result .= '<td><form action="/edit-delete-tickets.php" method="post">
+            $result .= '<td><form method="post">
             <input type="hidden" name="url" value="'.$url.'">
             <input type="hidden" name="id" value="'.$tick["id"].'">
             <input type="hidden" name="user_id" value="'.$tick["user_id"].'">
-            <input type="hidden" name="act" value="delete">
+            <input type="hidden" name="action" value="delete">
             <button type="submit">Удалить</button>
             </form></td>';
-            $result .= '<td><form action="/sertificate.php" method="post">
+            $result .= '<td><form method="post">
             <input type="hidden" name="url" value="'.$url.'">
+            <input type="hidden" name="action" value="sertificate">
             <input type="hidden" name="id" value="'.$tick["id"].'">
             <input type="hidden" name="user_id" value="'.$tick["user_id"].'">
             <button type="submit">Сертификат</button>

@@ -5,7 +5,7 @@ $(document).ready(function(){
 		var fb = $(this);
 		
         var formData = new FormData(this);
-        var fName = "ticket";
+        var fName = "/ticket";
         $.ajax({
             url: fName + ".php",
             type: "post",
@@ -16,7 +16,7 @@ $(document).ready(function(){
 				fb.trigger("reset");		
 			},
             error: function(){
-                fb.find('.res').html('Ваша заявка не отправлена! Попробуйте еще раз');
+                fb.find('.res').text('Ваша заявка не отправлена! Попробуйте еще раз');
             },
             cache: false,
             contentType: false,
